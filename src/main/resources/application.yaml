@@ -19,11 +19,17 @@ spring:
         check-template-location: true
         suffix: .html
         mode: HTML5
-        cache: false  # ???? ????, ?? false, ?? true
+        cache: false  # 프론트 자동 시작 개발 false, 운영 true
         order: 0
     devtools:
         livereload:
             enabled: true
+    datasource:
+        driver-class-name: com.mysql.cj.jdbc.Driver
+        url: jdbc:mysql://localhost:3306/shopadmin?serverTimezone=UTC&characterEncoding=UTF-8
+        username: shop
+        password: shop
+
     jpa:
         hibernate:
             ddl-auto: none
@@ -36,24 +42,6 @@ spring:
                 format_sql: true
         open-in-view: false
 
-database:
-    entity: com.shop.shopadmin.entity
-    datasource:
-        username: root
-        password: 1234
-        driver-class-name: com.mysql.cj.jdbc.Driver
-        connection-timeout: 10000 # default 30000
-        maximum-pool-size: 5 # default 10
-        minimum-idle: 1 # default maximumPoolSize
-        connection-test-query: select 1
-        validation-timeout: 5000  # default 5000
-        idle-timeout: 600000 # default 600000
-        jdbc-url: jdbc:mysql://localhost:3306/work?serverTimezone=Asia/Seoul&characterEncoding=UTF-8
-    mybatis:
-        config-location: classpath:/mybatis-config.xml
-        mapper-locations: classpath:/sql/*-sql.xml
-
-
 springdoc:
     api-docs:
         groups:
@@ -63,10 +51,10 @@ springdoc:
         displayRequestDuration: true
         groups-order: DESC
 
-logging: # ROOT?? ?? ?? ?? ??
+logging: # ROOT 로깅
     level:
         root: info
-        com.comas.work: debug #com.comas.demo.ssp ??? logging Level > debug
+        com.comas.work: debug
         org.hibernate:
             SQL: debug
 #      type.descriptor.sql.BasicBinder: trace

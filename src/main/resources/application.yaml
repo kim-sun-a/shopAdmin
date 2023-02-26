@@ -1,0 +1,77 @@
+server:
+    port: ${PORT:8080}
+    shutdown: graceful
+
+spring:
+    config:
+        activate:
+            on-profile: local
+    lifecycle:
+        timeout-per-shutdown-phase: 1m
+    main:
+        allow-circular-references: true
+    servlet:
+        multipart:
+            maxFileSize: 10MB
+            maxRequestSize: 10MB
+    thymeleaf:
+        prefix: classpath:templates/
+        check-template-location: true
+        suffix: .html
+        mode: HTML5
+        cache: false  # ???? ????, ?? false, ?? true
+        order: 0
+    devtools:
+        livereload:
+            enabled: true
+    jpa:
+        hibernate:
+            ddl-auto: none
+        show-sql: false
+        database: mysql
+        database-platform: org.hibernate.dialect.MySQL8Dialect
+        properties:
+            hibernate:
+                dialect: MySQL8Dialect
+                format_sql: true
+        open-in-view: false
+
+database:
+    entity: com.shop.shopadmin.entity
+    datasource:
+        username: root
+        password: 1234
+        driver-class-name: com.mysql.cj.jdbc.Driver
+        connection-timeout: 10000 # default 30000
+        maximum-pool-size: 5 # default 10
+        minimum-idle: 1 # default maximumPoolSize
+        connection-test-query: select 1
+        validation-timeout: 5000  # default 5000
+        idle-timeout: 600000 # default 600000
+        jdbc-url: jdbc:mysql://localhost:3306/work?serverTimezone=Asia/Seoul&characterEncoding=UTF-8
+    mybatis:
+        config-location: classpath:/mybatis-config.xml
+        mapper-locations: classpath:/sql/*-sql.xml
+
+
+springdoc:
+    api-docs:
+        groups:
+            enabled: true
+    swagger-ui:
+        path: /swagger-ui.html
+        displayRequestDuration: true
+        groups-order: DESC
+
+logging: # ROOT?? ?? ?? ?? ??
+    level:
+        root: info
+        com.comas.work: debug #com.comas.demo.ssp ??? logging Level > debug
+        org.hibernate:
+            SQL: debug
+#      type.descriptor.sql.BasicBinder: trace
+
+decorator:
+    datasource:
+        p6spy:
+            enable-logging: true

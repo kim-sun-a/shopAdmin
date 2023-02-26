@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <property name="LOG_DIR" value="${user.home}/logs/shopAdmin" />
+
+    <springProfile name="dev,prod">
+        <property name="LOG_DIR" value="/var/shopAdmin/log" />
+    </springProfile>
+
+    <property name="LOG_PATH" value="${LOG_DIR}/${spring.profiles.active}-shopAdmin.log"/>
+
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>[%d{yyyy-MM-dd HH:mm:ss.SSS}|%-5level|%thread|%X{requestMethod}|%X{requestURI}|%X{userId}|%X{userName}|%class{1}:%line] - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <!-- Rolling File Appender -->
+    <appender name="ROLLING_FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOG_PATH}</file>
+        <encoder>
+            <charset>UTF-8</charset>
+            <pattern>[%d{yyyy-MM-dd HH:mm:ss.SSS}|%-5level|%thread|%X{requestMethod}|%X{requestURI}|%X{userId}|%X{userName}|%class{1}:%line] - %msg%n</pattern>
+        </encoder>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${LOG_DIR}/${spring.profiles.active}-shop-admin-%d{yyyy-MM-dd}-%i.log</fileNamePattern>
+            <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <maxFileSize>50mb</maxFileSize>
+            </timeBasedFileNamingAndTriggeringPolicy>
+            <maxHistory>100</maxHistory>
+        </rollingPolicy>
+    </appender>
+
+    <springProfile name="local">
+        <logger name="com.shop.shopadmin" level="DEBUG"/>
+        <root level="DEBUG">
+            <appender-ref ref="STDOUT" />
+        </root>
+    </springProfile>
+
+    <springProfile name="dev">
+        <logger name="com.shop.shopadmin" level="DEBUG"/>
+        <root level="DEBUG">
+            <appender-ref ref="ROLLING_FILE"/>
+        </root>
+    </springProfile>
+
+    <springProfile name="prod">
+        <logger name="com.shop.shopadmin" level="INFO"/>
+        <root level="INFO">
+            <appender-ref ref="ROLLING_FILE"/>
+        </root>
+    </springProfile>
+
+</configuration>

@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      lang="ko"
+      dir="ltr">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <!-- Favicon icon -->
+    <link rel="shortcut icon" type="image/png" th:href="@{https://comasinteractive.com/favicon.ico}"/>
+    <title>COMAS-WORK MANAGER</title>
+    <!-- Custom CSS 최종 완료시 min 파일로 변경  -->
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body>
+<!-- ============================================================== -->
+<!-- Preloader - style you can find in spinners.css -->
+<!-- ============================================================== -->
+<div class="preloader">
+    <div class="lds-ripple">
+        <div class="lds-pos"></div>
+        <div class="lds-pos"></div>
+    </div>
+</div>
+<div id="main-wrapper">
+    <div class="container-fluid">
+        <div class="row auth-row min-vh-100">
+            <div class="col-lg-7 dataTables_wrapper">
+                <div class="auth-cover-wrapper bg-primary-100">
+                    <div class="auth-cover">
+                        <div class="title text-center">
+                            <h1 class="text-primary mb-10">Welcome COMAS</h1>
+                            <p class="text-medium">
+                                로그인을 하고 업무 요청 서비스를 이용하세요.
+                            </p>
+                        </div>
+                        <div class="cover-image">
+                            <img th:src="@{/assets/images/auth/signin-image.svg}" alt="" />
+                        </div>
+                        <div class="shape-image">
+                            <img th:src="@{assets/images/auth/shape.svg}" alt="" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- end col -->
+            <div class="col-lg-5">
+                <div class="signin-wrapper min-vh-100">
+                    <div class="form-wrapper">
+                        <form action="#">
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="form-group">
+                                        <label>ID</label>
+                                        <input class="form-control" type="text" placeholder="ID" />
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="form-group">
+                                        <label>Password</label>
+                                        <input class="form-control" type="password" placeholder="Password" />
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="form-check checkbox-style mb-4">
+                                        <input class="form-check-input" type="checkbox" value="" id="checkbox-remember"/>
+                                        <label class="form-check-label" for="checkbox-remember">아이디 기억하기</label>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="mt-1 mb-4 text-right">
+                                        <a href="#0" class="hover-underline">아이디·비밀번호 찾기</a>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="button-group d-flex justify-content-center flex-wrap">
+                                        <button class="btn btn-primary w-100">
+                                            Sign In
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                        <div class="singin-option pt-4">
+                            <p class="text-sm text-medium text-dark text-center">
+                                아직 계정이 없으신가요?
+                                <a href="/signup">회원가입하기</a>
+                            </p>
+                        </div>
+                    </div>
+                    <footer class="footer text-center text-muted mt-5">
+                        Copyright© <span th:text="${T(com.comas.work.utils.DateUtil).getCurrentYear()}"/> - <a href="https://comasinteractive.com/">COMAS INTERACTIVE.</a> All Rights reserved.
+                    </footer>
+                </div>
+            </div>
+        </div>
+        <!-- end row -->
+    </div>
+</div>
+<!-- All Jquery -->
+<!-- ============================================================== -->
+<script th:src="@{/assets/libs/jquery/dist/jquery.min.js}"></script>
+<!-- Bootstrap tether Core JavaScript -->
+<script th:src="@{/assets/libs/popper.js/dist/umd/popper.min.js}"></script>
+<script th:src="@{/assets/libs/bootstrap/dist/js/bootstrap.min.js}"></script>
+<!-- apps -->
+<!-- apps -->
+<script th:src="@{/js/app-style-switcher.js}"></script>
+<script th:src="@{/js/feather.min.js}"></script>
+<!-- slimscrollbar scrollbar JavaScript -->
+<script th:src="@{/assets/libs/perfect-scrollbar/dist/perfect-scrollbar.jquery.min.js}"></script>
+<!--Menu sidebar -->
+<script th:src="@{/js/sidebarmenu.js}"></script>
+<!--Custom JavaScript 최종 완료시 min 파일로 변경 -->
+<script th:src="@{/js/custom.js}"></script>
+</body>
+</html>

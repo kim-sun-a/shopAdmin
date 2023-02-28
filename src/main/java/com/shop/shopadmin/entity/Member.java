@@ -46,16 +46,12 @@ public class Member implements UserDetails {
     @Column(name = "phone")
     private String phone;
 
-    @Column(name = "company")
-    private String company;
+    @Embedded
+    private Address address;
 
-    @Column(name = "role")
-    private String role;
-
-    @Column(name = "use_yn", length = 1)
-    @Enumerated(EnumType.STRING)
-    @ColumnDefault("'Y'")
-    private UseYN useYn;                           // DEFAULT 'Y' COMMENT 'ON(Y)/OFF(N)'
+    @JsonIgnore
+    @OneToMany(mappedBy = "member")
+    private List<Order> orders = new ArrayList<>();
 
 
     @Column(name = "created_by", length = 20, updatable = false)
@@ -108,10 +104,11 @@ public class Member implements UserDetails {
     @Override
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        if(StringUtils.isEmpty(role)) return null;
-        List<GrantedAuthority> auth = new ArrayList<GrantedAuthority>();
-        auth.add(new SimpleGrantedAuthority(role));
-        return auth;
+//        if(StringUtils.isEmpty(role)) return null;
+//        List<GrantedAuthority> auth = new ArrayList<GrantedAuthority>();
+//        auth.add(new SimpleGrantedAuthority(role));
+//        return auth;
+        return null;
     }
 
     // == 비즈니스 로직 메서드 ==

@@ -1,15 +1,16 @@
 package com.shop.shopadmin.entity;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.shop.shopadmin.code.Constants;
-import lombok.Data;
+import lombok.Builder;
+import lombok.Getter;
 
 import javax.persistence.*;
 import java.util.Date;
 
 @Entity (name = "notice")
-@Data
+@Getter
+@Builder
 public class Notice {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,7 +24,7 @@ public class Notice {
     private String contents;
 
     @Column(name = "views")
-    private String views;
+    private Integer views;
 
     @Column(name = "created_by", length = 20, updatable = false)
     private String createdBy;
@@ -43,6 +44,15 @@ public class Notice {
 
 
     // === 비즈니스 메서드 ===
+
+    /**
+     * * 조회수 증가
+     */
+    public void addViews(int newView)  {
+        this.views += newView;
+    }
+
+
     @PrePersist
     public void prePersist() {
         this.created= new Date();

@@ -1,7 +1,6 @@
 server:
     port: ${PORT:8080}
     shutdown: graceful
-
 spring:
     config:
         activate:
@@ -24,12 +23,6 @@ spring:
     devtools:
         livereload:
             enabled: true
-    datasource:
-        driver-class-name: com.mysql.cj.jdbc.Driver
-        url: jdbc:mysql://localhost:3306/shopadmin?serverTimezone=UTC&characterEncoding=UTF-8
-        username: shop
-        password: shop
-
     jpa:
         hibernate:
             ddl-auto: none
@@ -40,6 +33,24 @@ spring:
                 dialect: org.hibernate.dialect.MySQL8Dialect
                 format_sql: true
         open-in-view: false
+
+database:
+    entity: com.shop.shopadmin.entity
+    datasource:
+        username: shop
+        password: shop
+        driver-class-name: com.mysql.cj.jdbc.Driver
+        connection-timeout: 10000 # default 30000
+        maximum-pool-size: 5 # default 10
+        minimum-idle: 1 # default maximumPoolSize
+        connection-test-query: select 1
+        validation-timeout: 5000  # default 5000
+        idle-timeout: 600000 # default 600000
+        jdbc-url: jdbc:mysql://localhost:3306/shopadmin?serverTimezone=Asia/Seoul&characterEncoding=UTF-8
+    mybatis:
+        config-location: classpath:/mybatis-config.xml
+        mapper-locations: classpath:/sql/*-sql.xml
+
 
 springdoc:
     api-docs:
